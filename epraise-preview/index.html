@@ -422,6 +422,7 @@ p:last-child{margin-bottom:0}
 .featured{padding:0 0 var(--section)}
 .featured-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:start}
 .featured-grid .card:nth-child(2){margin-top:0}
+.card--bare .frame{margin-bottom:0}
 
 /* ---------- testimonials ---------- */
 .testimonials{background:var(--clay);padding:0 0 var(--section);border-top:1px solid var(--ink-20);padding-top:var(--section)}
@@ -898,10 +899,12 @@ function photo(o, ratio, extra=""){
     ? '<img src="'+esc(o.image)+'" alt="'+esc(o.name)+' — '+esc(o.subtitle||"")+'" loading="lazy"'
       + (o.pos ? ' style="object-position:'+o.pos+'"' : '') + '>'
     : '';
+  const decorative = o.image ? '' :
+      ((o.no ? '<span class="ph-no" aria-hidden="true">'+esc(o.no)+'</span>' : '')
+     + '<span class="ph-word" aria-hidden="true">'+esc(o.word || o.name || "E.Praise")+'</span>');
+
   return '<div class="photo '+(ratio||"r45")+'" data-tone="'+(o.tone||"1")+'" '+extra+'>'
-       + (o.no ? '<span class="ph-no">'+esc(o.no)+'</span>' : '')
-       + img
-          + '<span class="ph-word">'+esc(o.word || o.name || "E.Praise")+'</span>'
+       + img + decorative
        + '</div>';
 }
 
@@ -939,6 +942,12 @@ function fabricCardLight(f, i){
     +   '<span class="f-price">'+esc(f.price)+'</span>'
     + '</div>'
     + '</article>';
+}
+
+function lookCardBare(l){
+  return '<a class="card card--bare" href="#/look/'+l.id+'" aria-label="'+esc(l.name)+' — '+esc(l.subtitle)+'">'
+    + '<div class="frame">'+photo(l, "r45")+arrowIcon()+'</div>'
+    + '</a>';
 }
 
 function fabricCard(f, i){
@@ -1071,7 +1080,7 @@ function viewHome(){
         <div><a class="link-u" href="#/collections">All looks</a></div>
       </div>
       <div class="featured-grid">
-        ${LOOKS.slice(0,4).map(lookCard).join("")}
+        ${LOOKS.slice(0,4).map(lookCardBare).join("")}
       </div>
     </div>
   </section>
