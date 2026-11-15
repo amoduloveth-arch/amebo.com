@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2B1D18">
+<title>Sign in — E.Praise Atelier</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232B1D18'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='28' fill='%23F6EFE9' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --clay:#F6EFE9; --ink:#2B1D18; --rust:#B4552D;
+  --ink-72:rgba(43,29,24,.72); --ink-55:rgba(43,29,24,.55); --ink-38:rgba(43,29,24,.38);
+  --ink-20:rgba(43,29,24,.20); --ink-10:rgba(43,29,24,.10);
+  --clay-72:rgba(246,239,233,.72); --clay-55:rgba(246,239,233,.55); --clay-20:rgba(246,239,233,.20);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter Tight',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pad:clamp(18px,4vw,48px);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--clay);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:300;line-height:1.05;letter-spacing:-.01em;margin:0}
+p{margin:0 0 1em}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit}
+img{display:block;max-width:100%}
+.hidden{display:none !important}
+:focus-visible{outline:1px solid var(--rust);outline-offset:3px}
+::selection{background:var(--rust);color:var(--clay)}
+
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--pad)}
+.eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--rust);font-weight:500}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 24px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--ink);background:transparent;color:var(--ink);border-radius:0;
+  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+  white-space:nowrap;line-height:1;
+}
+.btn:hover{background:var(--ink);color:var(--clay)}
+.btn--solid{background:var(--ink);color:var(--clay)}
+.btn--solid:hover{background:transparent;color:var(--ink)}
+.btn--rust{background:var(--rust);border-color:var(--rust);color:var(--clay)}
+.btn--rust:hover{background:transparent;color:var(--rust)}
+.btn--ghost{border-color:var(--ink-20)}
+.btn--sm{padding:9px 14px;font-size:9px;letter-spacing:.14em}
+.btn--danger{border-color:var(--rust);color:var(--rust)}
+.btn--danger:hover{background:var(--rust);color:var(--clay)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* ---------- full screens ---------- */
+.screen{min-height:100svh;display:grid;place-items:center;padding:32px var(--pad)}
+.panel{width:100%;max-width:430px;background:#FBF7F2;border:1px solid var(--ink-20);padding:clamp(28px,5vw,44px)}
+.brand-lock{display:flex;flex-direction:column;gap:4px;line-height:1}
+.brand-lock .b1{font-family:var(--serif);font-size:22px;letter-spacing:.2em;text-transform:uppercase}
+.brand-lock .b2{font-size:7.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--ink-55);padding-left:2px}
+.panel h1{font-size:36px;margin:26px 0 8px}
+.panel .sub{color:var(--ink-55);font-size:13.5px;margin-bottom:26px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-55);margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--ink-20);
+  padding:10px 0;font-size:15px;color:var(--ink);border-radius:0;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--rust)}
+.field textarea{resize:vertical;min-height:88px}
+.field .hint{font-size:11px;color:var(--ink-38);margin-top:6px}
+.alert{font-size:12.5px;padding:11px 13px;border-left:2px solid var(--rust);background:rgba(180,85,45,.06);color:var(--rust);margin-bottom:16px}
+.alert.ok{border-color:#2f6b4f;background:rgba(47,107,79,.07);color:#2f6b4f}
+.spinner{width:26px;height:26px;border:1px solid var(--ink-20);border-top-color:var(--rust);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- dashboard ---------- */
+.topbar{background:var(--ink);color:var(--clay);position:sticky;top:0;z-index:20}
+.topbar .inner{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.topbar .brand-lock .b2{color:var(--clay-55)}
+.topbar .right{display:flex;align-items:center;gap:18px}
+.topbar .who{font-size:10px;letter-spacing:.12em;color:var(--clay-55);text-transform:uppercase}
+.topbar .btn{border-color:var(--clay-20);color:var(--clay)}
+.topbar .btn:hover{background:var(--clay);color:var(--ink)}
+
+.main{padding:clamp(28px,5vw,56px) 0 90px}
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.page-head h1{font-size:clamp(32px,5vw,48px)}
+.page-head p{color:var(--ink-55);font-size:13.5px;margin:8px 0 0}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-20);border:1px solid var(--ink-20);margin-bottom:38px}
+.stat{background:var(--clay);padding:22px 24px}
+.stat .n{font-family:var(--serif);font-size:40px;line-height:1;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:'lnum' 1,'tnum' 1}
+.stat .l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-55);margin-top:8px}
+
+.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:22px}
+.search{position:relative;flex:1;max-width:340px}
+.search input{width:100%;border:1px solid var(--ink-20);background:transparent;padding:12px 14px;font-size:13px}
+.search input:focus{outline:none;border-color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.dcard{background:#FBF7F2;border:1px solid var(--ink-20);display:flex;flex-direction:column}
+.dcard .thumb{position:relative;aspect-ratio:4/5;background:#E6D8CA;overflow:hidden}
+.dcard .thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.dcard .thumb .noimg{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--serif);font-size:13px;color:var(--ink-38);letter-spacing:.2em}
+.dcard .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.dcard h3{font-size:20px}
+.dcard .cat{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
+.dcard .price{font-size:12.5px;color:var(--ink-72);margin-top:2px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.badge{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;padding:4px 7px;border:1px solid var(--ink-20);color:var(--ink-55)}
+.badge.pub{border-color:#2f6b4f;color:#2f6b4f}
+.badge.draft{border-color:var(--rust);color:var(--rust)}
+.badge.out{border-color:var(--ink);color:var(--ink)}
+.dcard .actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--ink-10)}
+.dcard .actions .btn{flex:1;justify-content:center}
+
+.empty{text-align:center;padding:70px 24px;border:1px dashed var(--ink-20);grid-column:1/-1}
+.empty h3{font-size:26px;margin-bottom:8px}
+.empty p{color:var(--ink-55);font-size:13.5px;max-width:40ch;margin:0 auto 20px}
+
+.skeleton{background:#FBF7F2;border:1px solid var(--ink-10);height:360px;position:relative;overflow:hidden}
+.skeleton::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(43,29,24,.05),transparent);animation:sh 1.2s infinite}
+@keyframes sh{to{transform:translateX(100%)}}
+
+/* ---------- editor dialog ---------- */
+dialog{
+  width:min(1080px,calc(100vw - 32px));max-height:92svh;padding:0;border:1px solid var(--ink-20);
+  background:var(--clay);color:var(--ink);margin:auto;
+}
+dialog::backdrop{background:rgba(43,29,24,.55)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid var(--ink-20);position:sticky;top:0;background:var(--clay);z-index:2}
+.dlg-head h2{font-size:26px}
+.dlg-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.dlg-col{padding:26px}
+.dlg-col + .dlg-col{border-left:1px solid var(--ink-20)}
+.dlg-foot{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:18px 26px;border-top:1px solid var(--ink-20);position:sticky;bottom:0;background:var(--clay);flex-wrap:wrap}
+.dlg-foot .msg{font-size:12px;color:var(--rust);flex:1;min-width:180px}
+
+.drop{display:block;border:1px dashed var(--ink-20);padding:26px 18px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s}
+.drop:hover,.drop.over{border-color:var(--rust);background:rgba(180,85,45,.04)}
+.drop strong{display:block;font-family:var(--serif);font-size:19px;font-weight:400;margin-bottom:4px}
+.drop span{font-size:11px;color:var(--ink-55)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.thumb-slot{position:relative;aspect-ratio:1;border:1px solid var(--ink-20);overflow:hidden;background:#E6D8CA}
+.thumb-slot img{width:100%;height:100%;object-fit:cover}
+.thumb-slot .rm{position:absolute;right:4px;top:4px;width:22px;height:22px;background:var(--ink);color:var(--clay);font-size:12px;line-height:1;display:grid;place-items:center}
+.thumb-slot .tag{position:absolute;left:0;bottom:0;right:0;background:rgba(43,29,24,.7);color:var(--clay);font-size:8px;letter-spacing:.12em;text-align:center;padding:3px;text-transform:uppercase}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.check{display:flex;gap:9px;align-items:center;font-size:12.5px;color:var(--ink-72);margin-bottom:10px}
+.check input{width:16px;height:16px;accent-color:var(--rust)}
+
+/* ---------- toasts ---------- */
+#toasts{position:fixed;right:18px;bottom:18px;z-index:100;display:flex;flex-direction:column;gap:10px;max-width:340px}
+.toast{background:var(--ink);color:var(--clay);padding:13px 16px;font-size:12.5px;line-height:1.5;border-left:2px solid var(--rust);animation:tin .3s var(--ease)}
+.toast.ok{border-left-color:#7fbf9c}
+.toast.err{border-left-color:#e08a5f}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}}
+
+.setup{max-width:760px;margin:0 auto;background:#FBF7F2;border:1px solid var(--ink-20);padding:clamp(24px,5vw,44px)}
+.setup h1{font-size:clamp(30px,4.5vw,42px);margin:18px 0 10px}
+.setup h2{font-size:22px;margin:26px 0 8px}
+.setup p,.setup li{font-size:13.5px;color:var(--ink-72);line-height:1.7}
+.setup code{background:rgba(43,29,24,.07);padding:2px 6px;font-size:12px}
+.setup ol{padding-left:20px}
+.setup li{margin-bottom:8px}
+
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .dlg-body{grid-template-columns:1fr}
+  .dlg-col + .dlg-col{border-left:0;border-top:1px solid var(--ink-20)}
+  .topbar .who{display:none}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .row2{grid-template-columns:1fr}
+  .page-head{align-items:flex-start}
+  .page-head .btn{width:100%}
+  .toolbar .search{max-width:none}
+  .topbar .inner{height:62px}
+  .stat .n{font-size:32px}
+  .dlg-foot .btn{flex:1}
+}
+</style>
+</head>
+<body>
+
+<div class="screen hidden" id="boot">
+  <div style="text-align:center">
+    <div class="spinner"></div>
+    <p style="margin-top:16px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-55)">Checking your session</p>
+  </div>
+</div>
+
+<div class="screen hidden" id="unconfigured">
+  <div class="setup">
+    <div class="brand-lock"><span class="b1">E.Praise</span><span class="b2">Couture's</span></div>
+    <h1>The backend is not connected yet.</h1>
+    <p>This page has no database, authentication or image storage to talk to. Follow <code>ADMIN-SETUP.md</code>, then paste your Supabase Project URL and anon key into the <code>CFG</code> block of this file.</p>
+    <p style="margin-top:22px"><a class="btn btn--solid" href="../../index.html">← Back to the website</a></p>
+  </div>
+</div>
+
+<div class="screen hidden" id="login">
+  <div class="panel">
+    <div class="brand-lock"><span class="b1">E.Praise</span><span class="b2">Couture's</span></div>
+    <h1>Atelier Admin</h1>
+    <p class="sub">Private area. Authorised access only.</p>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" required placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+      </div>
+      <div class="alert hidden" id="loginMsg"></div>
+      <button class="btn btn--solid" style="width:100%;margin-top:8px" type="submit" id="loginBtn">Sign in</button>
+      <p style="margin:18px 0 0;font-size:11px;color:var(--ink-38);line-height:1.6">There is no sign-up on this page. Accounts are created only inside the database by the owner.</p>
+      <p style="margin:14px 0 0;font-size:11px"><a href="../../index.html" style="color:var(--ink-55)">← Back to the website</a></p>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+const CFG = {
+  url:  "https://YOUR-PROJECT.supabase.co",
+  anon: "YOUR_ANON_KEY"
+};
+const configured = !CFG.url.includes("YOUR-PROJECT") && !CFG.anon.includes("YOUR_ANON_KEY");
+const $ = (s,r=document)=>r.querySelector(s);
+
+function show(id){
+  ["boot","unconfigured","login"].forEach(k => $("#"+k).classList.toggle("hidden", k !== id));
+}
+function loginError(msg){
+  const el = $("#loginMsg");
+  el.textContent = msg;
+  el.classList.remove("hidden");
+}
+
+let sb = null;
+
+async function boot(){
+  const params = new URLSearchParams(location.search);
+  if(!configured){ show("unconfigured"); return; }
+
+  const mod = await import("https://esm.sh/@supabase/supabase-js@2");
+  sb = mod.createClient(CFG.url, CFG.anon);
+
+  const { data } = await sb.auth.getSession();
+
+  if(data?.session){
+    // already signed in — confirm they are an administrator
+    const { data: admin } = await sb.from("admins").select("user_id").eq("user_id", data.session.user.id).maybeSingle();
+    if(admin){ location.replace("../"); return; }
+    await sb.auth.signOut();
+    loginError("This account is not an administrator for this atelier.");
+    show("login");
+    return;
+  }
+
+  show("login");
+  if(params.get("e") === "notadmin") loginError("This account is not an administrator for this atelier.");
+  if(params.get("e") === "expired")  loginError("Your session ended. Please sign in again.");
+}
+
+$("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = $("#email").value.trim();
+  const password = $("#password").value;
+  const btn = $("#loginBtn");
+  $("#loginMsg").classList.add("hidden");
+
+  if(!email || !password){ loginError("Enter your email and password."); return; }
+
+  btn.disabled = true; btn.textContent = "Signing in…";
+  try{
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if(error) throw error;
+
+    const { data: admin } = await sb.from("admins").select("user_id").eq("user_id", data.session.user.id).maybeSingle();
+    if(!admin){
+      await sb.auth.signOut();
+      throw new Error("notadmin");
+    }
+    location.replace("../");
+  }catch(err){
+    btn.disabled = false; btn.textContent = "Sign in";
+    const m = err.message || "";
+    if(m === "notadmin") loginError("Signed in, but this account is not an administrator.");
+    else if(m === "Invalid login credentials") loginError("Those details did not match. Check your email and password.");
+    else if(/Email not confirmed/i.test(m)) loginError("This account has not been confirmed yet.");
+    else loginError(m || "Sign-in failed. Try again.");
+  }
+});
+
+boot().catch(err=>{
+  console.error(err);
+  show("login");
+  loginError("Could not reach the backend. Check the configuration.");
+});
+</script>
+</body>
+</html>
